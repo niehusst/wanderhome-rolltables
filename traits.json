@@ -1,0 +1,469 @@
+[
+  {
+    "category": "artistic",
+    "traits": [
+      {
+        "name": "crafty",
+        "description": "A crafty kith is very skilled at putting all the pieces together in an unconventional way. They are often tinkers, mongers, and magicians, among others.",
+        "actions": [
+          "invent something totally new",
+          "propose an alternate approach",
+          "reveal that a plan they've had in motion has paid off"
+        ]
+      },
+      {
+        "name": "dramatic",
+        "description": "A dramatic kith loves to show off to impress and please others. They are often singers, harkers, and socialites, among others.",
+        "actions": [
+          "put on a big show, with heightened emotions and histrionics",
+          "distract someone with a talented display",
+          "play up your emotions to absurd levels"
+        ]
+      },
+      {
+        "name": "imaginative",
+        "description": "An imaginative kith's head is always up in the clouds. They are often artists, glaziers, and dreamers, among others.",
+        "actions": [
+          "explain a way things could be better",
+          "forget about something really important",
+          "describe an everyday object in a way no one's ever thought about it before"
+        ]
+      },
+      {
+        "name": "poetic",
+        "description": "A poetic kith has a deep love for wordplay and lyricism. They are often authors, rimesters, and astrologers, among others.",
+        "actions": [
+          "wax metaphorical",
+          "get caught up in the big picture",
+          "give advice on what someone else should say"
+        ]
+      },
+      {
+        "name": "glamorous",
+        "description": "A glamorous kith has a beguiling and enchanting appearance that is both beautiful and impossible. They are often kaleidoscopic insects, flirtatious daemons, and especially skilled makeup artists, among others.",
+        "actions": [
+          "dazzle and stun everyone who beholds you",
+          "reveal the appearance you hide underneath",
+          "tell someone to look at you. If they want to look away, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "miraculous",
+        "description": "A miraculous kith can do things no one else can do. They are often great and mighty gods, powerful wizards, and wish-granting fish, among others.",
+        "actions": [
+          "make possible the impossible",
+          "take someone's hand and fly with them",
+          "offer to grant someone's wish, in a way that won't work out how they want. If they want to reject your offer, they're going to need to spend a token"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "grounded",
+    "traits": [
+      {
+        "name": "honest",
+        "description": "An honest kith always says what's on their mind. They are often bayweavers, bookbinders, and clerks, among others.",
+        "actions": [
+          "lay out the facts, as you see it",
+          "point out the truth everyone else has been ignoring",
+          "ask: \"Do you want my opinion?\""
+        ]
+      },
+      {
+        "name": "quiet",
+        "description": "A quiet kith doesn't have much to say. They are often colporteurs, glassblowers, and wallflowers, among others.",
+        "actions": [
+          "tap on someone's shoulder",
+          "stare at someone until they get the point",
+          "non-verbally ask: \"Are you okay?\""
+        ]
+      },
+      {
+        "name": "watchful",
+        "description": "A watchful kith keeps a close eye on the world around them. They are often guards, astronomers, and scribes, among others.",
+        "actions": [
+          "point out something people missed",
+          "guard the exits",
+          "ask: \"What's that you're hiding?\""
+        ]
+      },
+      {
+        "name": "wise",
+        "description": "A wise kith has learned a lot from listening and moving through the world. They are often monks, herbalists, and janitors, among others.",
+        "actions": [
+          "reflect on what someone else has said",
+          "propose a path quite unlike those that others have suggested",
+          "ask: \"What are your feelings on the matter?\""
+        ]
+      },
+      {
+        "name": "intertwined",
+        "description": "An intertwined kith is rooted in the world around them, and is just as much a part of the trees and the sky as they are themself. They are often contemplative shamans, gods of hidden places, and anyone who listens to the land, among others.",
+        "actions": [
+          "show how two things are connected in an unexpected way",
+          "take your time and move very carefully",
+          "help someone ask the world around them for guidance. If they want to know the answer, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "invisible",
+        "description": "An invisible kith cannot be seen. They are often ghostly spirits, terrified gods, and tiny scuttling creatures, among others.",
+        "actions": [
+          "have been somewhere the whole time",
+          "move right past people who should've spotted you",
+          "vanish. If someone wants to find you again, they're going to need to spend a token"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "intellectual",
+    "traits": [
+      {
+        "name": "ambitious",
+        "description": "An ambitious kith has goals and aspirations beyond where they are in life. They are often scribblers, scullions, and apprentices, among others.",
+        "actions": [
+          "take a calculated risk",
+          "explain how you're the only person who can handle this",
+          "ask: \"How would you make things better?\""
+        ]
+      },
+      {
+        "name": "cunning",
+        "description": "A cunning kith is skilled at turning events and situations in their favor. They are often guttersnipes, wainwrights, and con artists, among others.",
+        "actions": [
+          "get somewhere you're not supposed to be",
+          "tell a compelling lie",
+          "ask: \"What's your real goal here?\""
+        ]
+      },
+      {
+        "name": "inquisitive",
+        "description": "An inquisitive kith grabs hold of all the information that they can. They are often journalists, alchemists, and enumerators, among others.",
+        "actions": [
+          "focus on an irrelevant detail",
+          "hold something up to the light",
+          "ask: \"What's this?\""
+        ]
+      },
+      {
+        "name": "learned",
+        "description": "A learned kith has spent plenty of time with texts and traditional learning. They are often professors, librarians, and apothecaries, among others.",
+        "actions": [
+          "reference a text no one else here has read",
+          "know something useful that applies to the situation",
+          "ask: \"Do you want my advice?\""
+        ]
+      },
+      {
+        "name": "oracular",
+        "description": "An oracular kith can see the future, for better or for worse. They are often venerated sages, enigmatic gods, and stargazers, among others.",
+        "actions": [
+          "make a vague and unclear reference to something that hasn't happened yet",
+          "say: \"I told you so.\"",
+          "tell someone the bad news about what their future holds. If they want to defy you, they'll need to spend a token"
+        ]
+      },
+      {
+        "name": "witchy",
+        "description": "A witchy kith is skilled at quiet and tricksy magics. They are often healers, court magicians, and kind old ladies that live in the swamp, among others.",
+        "actions": [
+          "cackle",
+          "mix assorted components to create something new",
+          "point out a personality flaw someone hasn't been dealing with. If you're right, put a curse on them. If they want to get rid of the curse, they're going to need to address their flaw"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "personal",
+    "traits": [
+      {
+        "name": "cheerful",
+        "description": "A cheerful kith is happy and positive. They are often bakers, friars, and cooks, among others.",
+        "actions": [
+          "look on the bright side",
+          "whistle a chipper tune",
+          "gallivant into an awkward situation"
+        ]
+      },
+      {
+        "name": "confident",
+        "description": "A confident kith knows exactly who they are and who they want to be. They are often blacksmiths, plumbers, and drovers, among others.",
+        "actions": [
+          "jump headfirst into action",
+          "charge into a situation without understanding the risks",
+          "say: \"I've got it covered.\""
+        ]
+      },
+      {
+        "name": "pensive",
+        "description": "A pensive kith has a lot of heavy things on their mind. They are often printers, vintners, and bellringers, among others.",
+        "actions": [
+          "rain on someone's parade",
+          "stare off into the distance mournfully",
+          "ask: \"What else can we do?\""
+        ]
+      },
+      {
+        "name": "relaxed",
+        "description": "A relaxed kith is relaxed and perpetually calm. They are often fishers, brewsters, and dilly-dalliers, among others.",
+        "actions": [
+          "go with the flow",
+          "remind everyone to take a step back",
+          "ask: \"Do you wanna talk about it?\""
+        ]
+      },
+      {
+        "name": "luminescent",
+        "description": "A luminescent kith is full of light that casts a glow across the world. They are often motes of light, fallen stars, and fireflies, among others.",
+        "actions": [
+          "shed light on the shadows of the world",
+          "lead the way",
+          "non-verbally ask: \"What is true about you that you keep from everyone?\" If they want to withhold an answer from you, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "venerable",
+        "description": "A venerable kith is as old as the hills and the earth. They are often mountain gods, isopods from an ancient time, and beings deep in the old dark, among others.",
+        "actions": [
+          "offer something that hasn't been seen in a very long time",
+          "show what things were like in more grim times",
+          "tell someone how they will repeat the mistakes of the past. If they want to prove you wrong, they're going to need to spend a token"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "physical",
+    "traits": [
+      {
+        "name": "adventurous",
+        "description": "An adventurous kith always wants to be getting tangled up in something new. They are often aeronauts, sailors, and itinerants, among others.",
+        "actions": [
+          "declare where you're going next",
+          "charge headfirst into trouble",
+          "have circumstances improbably work out for you"
+        ]
+      },
+      {
+        "name": "passionate",
+        "description": "A passionate kith is full of intense and explosive emotions. They are often mail-carriers, writers, and flâuners, among others.",
+        "actions": [
+          "explain why this matters to you",
+          "say exactly what's on your mind right now",
+          "lose your temper and damage something important"
+        ]
+      },
+      {
+        "name": "resolute",
+        "description": "A resolute kith cannot be swayed from their current path, no matter what. They are often architects, caulkers, and arkwrights, among others.",
+        "actions": [
+          "keep at something that others would give up at",
+          "reject what's right in front of your eyes",
+          "refuse to yield under pressure"
+        ]
+      },
+      {
+        "name": "sturdy",
+        "description": "A sturdy kith can be depended on when times are tough. They are often carpenters, spinsters, and dockhands, among others.",
+        "actions": [
+          "support something in danger of collapse",
+          "push something concerning aside",
+          "exert yourself to protect someone else"
+        ]
+      },
+      {
+        "name": "feral",
+        "description": "A feral kith rejects traditional society and embraces monstrosity. They are often fearsome insects, hungry gods, and kids raised by the wilderness itself, among others.",
+        "actions": [
+          "call out to the wild, and hear it respond",
+          "ask: \"What's stopping you?\"",
+          "show all your teeth and bite. If someone doesn't want to get bit, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "mighty",
+        "description": "A mighty kith has a strength that is beyond normal capacity. They are often great warriors, herculean gods, and beasts of forgotten legend, among others.",
+        "actions": [
+          "take on a heavy burden",
+          "move the unmovable",
+          "anchor something in the ground. If someone wants to move it even the slightest bit, they're going to need to spend a token"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "social",
+    "traits": [
+      {
+        "name": "caring",
+        "description": "A caring kith is willing to die to keep someone else safe. They are often doctors, farmers, and coroners, among others.",
+        "actions": [
+          "protect someone else from the world",
+          "inconvenience yourself to help someone else",
+          "ask: \"What do you need right now?\""
+        ]
+      },
+      {
+        "name": "friendly",
+        "description": "A friendly kith gets along well with folk from all over. They are often innkeeps, barbers, and bards, among others.",
+        "actions": [
+          "start up a conversation with someone else",
+          "introduce someone to an old friend of yours",
+          "get really attached to an inanimate object"
+        ]
+      },
+      {
+        "name": "proper",
+        "description": "A proper kith sticks with formality and tradition. They are often butlers, grocers, and chamberlains, among others.",
+        "actions": [
+          "explain how things have been handled in the past",
+          "judge something for its inappropriateness",
+          "struggle to get something new"
+        ]
+      },
+      {
+        "name": "raucous",
+        "description": "A raucous kith is always looking for a good time. They are often revelers, jesters, and roustabouts, among others.",
+        "actions": [
+          "find the fun in a dull task",
+          "get lost in the excitement",
+          "know exactly where a better party is"
+        ]
+      },
+      {
+        "name": "empathetic",
+        "description": "An empathetic kith can connect with and understand things no one else can. They are often gentle teachers, affectionate spirits, and anyone who has a knack for getting it, among others.",
+        "actions": [
+          "communicate with something that can't normally talk",
+          "express a concept in a way everyone understands",
+          "non-verbally ask: \"What are you feeling?\" If they don't want to answer you truthfully, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "many-faced",
+        "description": "A many-faced kith is a shapeshifter, who can adopt other forms. They are often trickster gods, sneaky thieves with a little bit of magic, and skilled mimics, among others.",
+        "actions": [
+          "change dramatically, and become something new",
+          "reveal another kith to have been them this whole time",
+          "look exactly like another character. If someone wants to spot the difference, they're going to need to spend a token"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "traumatized",
+    "traits": [
+      {
+        "name": "cautious",
+        "description": "A cautious kith spent the last of their trust a long time ago. They are often exhausted widows, cold-hearted farmers, and those who have seen first-hand the harshness of the world, among others.",
+        "actions": [
+          "point out a danger, real or imagined",
+          "refuse to open up to someone else",
+          "step out of your comfort zone, even slightly"
+        ]
+      },
+      {
+        "name": "empty",
+        "description": "An empty kith feels like there's just not much left to them anymore. They are often war-blasted survivors, haunted veterans, and those hollowed out by pain, among others.",
+        "actions": [
+          "sigh and gaze blankly",
+          "ask: \"Does it matter?\"",
+          "display an emotion you thought you couldn't anymore"
+        ]
+      },
+      {
+        "name": "frantic",
+        "description": "A frantic kith is struggling to get everything done. They are often overburdened caretakers, manic intellectuals, and those desperate to please, among others.",
+        "actions": [
+          "agree to something dangerous or risky",
+          "try to say too many things all at once",
+          "push against your instincts and take a break"
+        ]
+      },
+      {
+        "name": "furious",
+        "description": "A furious kith cannot hold back their rage. They are often vengeful mothers, soldiers with fuming eyes, and those forged into a weapon by the pain in their heart, among others.",
+        "actions": [
+          "lash out without meaning to",
+          "bottle everything up and seethe",
+          "express your rage in a constructive manner"
+        ]
+      },
+      {
+        "name": "grieving",
+        "description": "A grieving kith freshly mourns the loss of their love. They are often heartbroken parents, terrified exiles, and those promised greatness, among others.",
+        "actions": [
+          "overflow with emotion",
+          "hold tight to comfort and refuse to let go",
+          "ask: \"Are you in a place to listen right now?\""
+        ]
+      },
+      {
+        "name": "hurt",
+        "description": "A hurt kith nurses wounds that will never fully heal. They are often old heroes, aching patients, and those marked by pain, among others.",
+        "actions": [
+          "flinch at someone else's actions",
+          "re-open an old wound",
+          "articulate a step on the path towards healing"
+        ]
+      },
+      {
+        "name": "lost",
+        "description": "A lost kith has forgotten how to get back home. They are often lonely travelers, confused prophets, and those disassociated from this world, among others.",
+        "actions": [
+          "wander deep into the darkness",
+          "express the disconnect between yourself and the world around you",
+          "seek out the help of someone else to anchor you"
+        ]
+      },
+      {
+        "name": "nervous",
+        "description": "A nervous kith is very stressed out. They are often freaked-out kids, princes out of their depth, and those overwhelmed by the many dangers of the world, among others.",
+        "actions": [
+          "worry about something you don't have control over",
+          "say: \"I'm sorry.\"",
+          "ask: \"Is everything okay?\""
+        ]
+      },
+      {
+        "name": "starving",
+        "description": "A starving kith has been denied their hunger for too long, and it's burning them up inside. They are often hungry ghouls, spiteful wardens, and the shadows of monstrous gods, among others.",
+        "actions": [
+          "gnaw on what's left",
+          "blame the wrong person for your hunger",
+          "name a person, place, object, or secret. If someone wants to hide it from you, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "dead",
+        "description": "A dead kith was once alive, but isn't anymore. They are often spectral lights, wandering souls, and the last remnants of a forgotten time, among others.",
+        "actions": [
+          "provide a bridge from one life to the other",
+          "send a chill down someone's spine",
+          "show someone something they truly don't want to grapple with. If they want to avoid thinking about it, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "heroic",
+        "description": "A heroic kith believes they are the savior of the world. What a cruel fate indeed. They are often dragon-slayers, leaders of the rebellion, and those arrogant enough to seek out power, among others.",
+        "actions": [
+          "know what's best for everyone else",
+          "present a perfect persona to the world",
+          "declare someone fundamentally good or irredeemably evil. If anyone wants to prove you wrong, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "royal",
+        "description": "A royal kith rules over this land with authority and lonely gravitas. They are often arrogant kings, towering giants, or those destined to be undone by their own glory, among others.",
+        "actions": [
+          "engage in a petty and useless display of power",
+          "inflict your will on the world around you",
+          "make a sweeping proclamation. If someone wants to openly defy you, they're going to need to spend a token"
+        ]
+      }
+    ]
+  }
+]

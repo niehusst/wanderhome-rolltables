@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wanderhome Roll Tables</title>
+<style>
+  :root {
+    --bg: #f4efe6;
+    --panel: #fffdf8;
+    --ink: #3b3228;
+    --muted: #7c6f5e;
+    --accent: #6b7f5b;
+    --accent-2: #a2674c;
+    --border: #ddd2bf;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1rem 4rem;
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  header { text-align: center; margin-bottom: 2rem; }
+  h1 { margin: 0 0 .25rem; font-size: 2rem; letter-spacing: .02em; }
+  header p { margin: 0; color: var(--muted); font-style: italic; }
+  .tables {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .table-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(60, 45, 25, .07);
+    display: flex;
+    flex-direction: column;
+  }
+  .table-card h2 { margin: 0 0 .15rem; font-size: 1.35rem; }
+  .table-card .hint { margin: 0 0 1rem; color: var(--muted); font-size: .85rem; font-style: italic; }
+  .controls { display: flex; gap: .6rem; margin-bottom: 1rem; }
+  button {
+    font-family: inherit;
+    font-size: .95rem;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: .55rem 1rem;
+    transition: background .15s, border-color .15s, opacity .15s;
+  }
+  .roll-btn { background: var(--accent); color: #fff; }
+  .roll-btn:hover { background: #5a6d4c; }
+  .copy-btn { background: transparent; color: var(--accent-2); border-color: var(--border); }
+  .copy-btn:hover { border-color: var(--accent-2); }
+  .copy-btn:disabled { opacity: .4; cursor: default; }
+  .result {
+    flex: 1;
+    border-top: 1px dashed var(--border);
+    padding-top: .9rem;
+  }
+  .result.empty { color: var(--muted); font-style: italic; }
+  .result h3 {
+    margin: 0 0 .2rem;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    color: var(--accent-2);
+  }
+  .result .cat {
+    display: inline-block;
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    margin-bottom: .35rem;
+  }
+  .result .desc { margin: 0 0 .8rem; }
+  .result h4 {
+    margin: .8rem 0 .3rem;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: .15rem;
+  }
+  .result ul { margin: 0; padding-left: 1.2rem; }
+  .result li { margin-bottom: .3rem; }
+  .actions-list li::marker { content: "\2192  "; color: var(--accent); }
+  .footer-note { text-align: center; color: var(--muted); font-size: .8rem; margin-top: 2.5rem; font-style: italic; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Wanderhome Roll Tables</h1>
+  <p>Traits &amp; Natures for your travels through the Hæth</p>
+</header>
+
+<div class="tables">
+  <section class="table-card">
+    <h2>Trait</h2>
+    <p class="hint">Rolls a trait category (trauma is half as likely), a trait, and 1&ndash;2 of its actions.</p>
+    <div class="controls">
+      <button class="roll-btn" id="rollTrait">Roll Trait</button>
+      <button class="copy-btn" id="copyTrait" disabled>Copy</button>
+    </div>
+    <div class="result empty" id="traitResult">No roll yet.</div>
+  </section>
+
+  <section class="table-card">
+    <h2>Nature</h2>
+    <p class="hint">Rolls a nature category, a nature, 2 unique aesthetics, and 1 piece of folklore.</p>
+    <div class="controls">
+      <button class="roll-btn" id="rollNature">Roll Nature</button>
+      <button class="copy-btn" id="copyNature" disabled>Copy</button>
+    </div>
+    <div class="result empty" id="natureResult">No roll yet.</div>
+  </section>
+</div>
+
+<p class="footer-note">Wanderhome is a game by Jay Dragon. This is an unofficial fan-made rolling tool.</p>
+
+<script>
+const TRAITS = [
+  {
+    "category": "artistic",
+    "traits": [
+      {
+        "name": "crafty",
+        "description": "A crafty kith is very skilled at putting all the pieces together in an unconventional way. They are often tinkers, mongers, and magicians, among others.",
+        "actions": [
+          "invent something totally new",
+          "propose an alternate approach",
+          "reveal that a plan they've had in motion has paid off"
+        ]
+      },
+      {
+        "name": "dramatic",
+        "description": "A dramatic kith loves to show off to impress and please others. They are often singers, harkers, and socialites, among others.",
+        "actions": [
+          "put on a big show, with heightened emotions and histrionics",
+          "distract someone with a talented display",
+          "play up your emotions to absurd levels"
+        ]
+      },
+      {
+        "name": "imaginative",
+        "description": "An imaginative kith's head is always up in the clouds. They are often artists, glaziers, and dreamers, among others.",
+        "actions": [
+          "explain a way things could be better",
+          "forget about something really important",
+          "describe an everyday object in a way no one's ever thought about it before"
+        ]
+      },
+      {
+        "name": "poetic",
+        "description": "A poetic kith has a deep love for wordplay and lyricism. They are often authors, rimesters, and astrologers, among others.",
+        "actions": [
+          "wax metaphorical",
+          "get caught up in the big picture",
+          "give advice on what someone else should say"
+        ]
+      },
+      {
+        "name": "glamorous",
+        "description": "A glamorous kith has a beguiling and enchanting appearance that is both beautiful and impossible. They are often kaleidoscopic insects, flirtatious daemons, and especially skilled makeup artists, among others.",
+        "actions": [
+          "dazzle and stun everyone who beholds you",
+          "reveal the appearance you hide underneath",
+          "tell someone to look at you. If they want to look away, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "miraculous",
+        "description": "A miraculous kith can do things no one else can do. They are often great and mighty gods, powerful wizards, and wish-granting fish, among others.",
+        "actions": [
+          "make possible the impossible",
+          "take someone's hand and fly with them",
+          "offer to grant someone's wish, in a way that won't work out how they want. If they want to reject your offer, they're going to need to spend a token"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "grounded",
+    "traits": [
+      {
+        "name": "honest",
+        "description": "An honest kith always says what's on their mind. They are often bayweavers, bookbinders, and clerks, among others.",
+        "actions": [
+          "lay out the facts, as you see it",
+          "point out the truth everyone else has been ignoring",
+          "ask: \"Do you want my opinion?\""
+        ]
+      },
+      {
+        "name": "quiet",
+        "description": "A quiet kith doesn't have much to say. They are often colporteurs, glassblowers, and wallflowers, among others.",
+        "actions": [
+          "tap on someone's shoulder",
+          "stare at someone until they get the point",
+          "non-verbally ask: \"Are you okay?\""
+        ]
+      },
+      {
+        "name": "watchful",
+        "description": "A watchful kith keeps a close eye on the world around them. They are often guards, astronomers, and scribes, among others.",
+        "actions": [
+          "point out something people missed",
+          "guard the exits",
+          "ask: \"What's that you're hiding?\""
+        ]
+      },
+      {
+        "name": "wise",
+        "description": "A wise kith has learned a lot from listening and moving through the world. They are often monks, herbalists, and janitors, among others.",
+        "actions": [
+          "reflect on what someone else has said",
+          "propose a path quite unlike those that others have suggested",
+          "ask: \"What are your feelings on the matter?\""
+        ]
+      },
+      {
+        "name": "intertwined",
+        "description": "An intertwined kith is rooted in the world around them, and is just as much a part of the trees and the sky as they are themself. They are often contemplative shamans, gods of hidden places, and anyone who listens to the land, among others.",
+        "actions": [
+          "show how two things are connected in an unexpected way",
+          "take your time and move very carefully",
+          "help someone ask the world around them for guidance. If they want to know the answer, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "invisible",
+        "description": "An invisible kith cannot be seen. They are often ghostly spirits, terrified gods, and tiny scuttling creatures, among others.",
+        "actions": [
+          "have been somewhere the whole time",
+          "move right past people who should've spotted you",
+          "vanish. If someone wants to find you again, they're going to need to spend a token"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "intellectual",
+    "traits": [
+      {
+        "name": "ambitious",
+        "description": "An ambitious kith has goals and aspirations beyond where they are in life. They are often scribblers, scullions, and apprentices, among others.",
+        "actions": [
+          "take a calculated risk",
+          "explain how you're the only person who can handle this",
+          "ask: \"How would you make things better?\""
+        ]
+      },
+      {
+        "name": "cunning",
+        "description": "A cunning kith is skilled at turning events and situations in their favor. They are often guttersnipes, wainwrights, and con artists, among others.",
+        "actions": [
+          "get somewhere you're not supposed to be",
+          "tell a compelling lie",
+          "ask: \"What's your real goal here?\""
+        ]
+      },
+      {
+        "name": "inquisitive",
+        "description": "An inquisitive kith grabs hold of all the information that they can. They are often journalists, alchemists, and enumerators, among others.",
+        "actions": [
+          "focus on an irrelevant detail",
+          "hold something up to the light",
+          "ask: \"What's this?\""
+        ]
+      },
+      {
+        "name": "learned",
+        "description": "A learned kith has spent plenty of time with texts and traditional learning. They are often professors, librarians, and apothecaries, among others.",
+        "actions": [
+          "reference a text no one else here has read",
+          "know something useful that applies to the situation",
+          "ask: \"Do you want my advice?\""
+        ]
+      },
+      {
+        "name": "oracular",
+        "description": "An oracular kith can see the future, for better or for worse. They are often venerated sages, enigmatic gods, and stargazers, among others.",
+        "actions": [
+          "make a vague and unclear reference to something that hasn't happened yet",
+          "say: \"I told you so.\"",
+          "tell someone the bad news about what their future holds. If they want to defy you, they'll need to spend a token"
+        ]
+      },
+      {
+        "name": "witchy",
+        "description": "A witchy kith is skilled at quiet and tricksy magics. They are often healers, court magicians, and kind old ladies that live in the swamp, among others.",
+        "actions": [
+          "cackle",
+          "mix assorted components to create something new",
+          "point out a personality flaw someone hasn't been dealing with. If you're right, put a curse on them. If they want to get rid of the curse, they're going to need to address their flaw"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "personal",
+    "traits": [
+      {
+        "name": "cheerful",
+        "description": "A cheerful kith is happy and positive. They are often bakers, friars, and cooks, among others.",
+        "actions": [
+          "look on the bright side",
+          "whistle a chipper tune",
+          "gallivant into an awkward situation"
+        ]
+      },
+      {
+        "name": "confident",
+        "description": "A confident kith knows exactly who they are and who they want to be. They are often blacksmiths, plumbers, and drovers, among others.",
+        "actions": [
+          "jump headfirst into action",
+          "charge into a situation without understanding the risks",
+          "say: \"I've got it covered.\""
+        ]
+      },
+      {
+        "name": "pensive",
+        "description": "A pensive kith has a lot of heavy things on their mind. They are often printers, vintners, and bellringers, among others.",
+        "actions": [
+          "rain on someone's parade",
+          "stare off into the distance mournfully",
+          "ask: \"What else can we do?\""
+        ]
+      },
+      {
+        "name": "relaxed",
+        "description": "A relaxed kith is relaxed and perpetually calm. They are often fishers, brewsters, and dilly-dalliers, among others.",
+        "actions": [
+          "go with the flow",
+          "remind everyone to take a step back",
+          "ask: \"Do you wanna talk about it?\""
+        ]
+      },
+      {
+        "name": "luminescent",
+        "description": "A luminescent kith is full of light that casts a glow across the world. They are often motes of light, fallen stars, and fireflies, among others.",
+        "actions": [
+          "shed light on the shadows of the world",
+          "lead the way",
+          "non-verbally ask: \"What is true about you that you keep from everyone?\" If they want to withhold an answer from you, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "venerable",
+        "description": "A venerable kith is as old as the hills and the earth. They are often mountain gods, isopods from an ancient time, and beings deep in the old dark, among others.",
+        "actions": [
+          "offer something that hasn't been seen in a very long time",
+          "show what things were like in more grim times",
+          "tell someone how they will repeat the mistakes of the past. If they want to prove you wrong, they're going to need to spend a token"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "physical",
+    "traits": [
+      {
+        "name": "adventurous",
+        "description": "An adventurous kith always wants to be getting tangled up in something new. They are often aeronauts, sailors, and itinerants, among others.",
+        "actions": [
+          "declare where you're going next",
+          "charge headfirst into trouble",
+          "have circumstances improbably work out for you"
+        ]
+      },
+      {
+        "name": "passionate",
+        "description": "A passionate kith is full of intense and explosive emotions. They are often mail-carriers, writers, and flâuners, among others.",
+        "actions": [
+          "explain why this matters to you",
+          "say exactly what's on your mind right now",
+          "lose your temper and damage something important"
+        ]
+      },
+      {
+        "name": "resolute",
+        "description": "A resolute kith cannot be swayed from their current path, no matter what. They are often architects, caulkers, and arkwrights, among others.",
+        "actions": [
+          "keep at something that others would give up at",
+          "reject what's right in front of your eyes",
+          "refuse to yield under pressure"
+        ]
+      },
+      {
+        "name": "sturdy",
+        "description": "A sturdy kith can be depended on when times are tough. They are often carpenters, spinsters, and dockhands, among others.",
+        "actions": [
+          "support something in danger of collapse",
+          "push something concerning aside",
+          "exert yourself to protect someone else"
+        ]
+      },
+      {
+        "name": "feral",
+        "description": "A feral kith rejects traditional society and embraces monstrosity. They are often fearsome insects, hungry gods, and kids raised by the wilderness itself, among others.",
+        "actions": [
+          "call out to the wild, and hear it respond",
+          "ask: \"What's stopping you?\"",
+          "show all your teeth and bite. If someone doesn't want to get bit, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "mighty",
+        "description": "A mighty kith has a strength that is beyond normal capacity. They are often great warriors, herculean gods, and beasts of forgotten legend, among others.",
+        "actions": [
+          "take on a heavy burden",
+          "move the unmovable",
+          "anchor something in the ground. If someone wants to move it even the slightest bit, they're going to need to spend a token"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "social",
+    "traits": [
+      {
+        "name": "caring",
+        "description": "A caring kith is willing to die to keep someone else safe. They are often doctors, farmers, and coroners, among others.",
+        "actions": [
+          "protect someone else from the world",
+          "inconvenience yourself to help someone else",
+          "ask: \"What do you need right now?\""
+        ]
+      },
+      {
+        "name": "friendly",
+        "description": "A friendly kith gets along well with folk from all over. They are often innkeeps, barbers, and bards, among others.",
+        "actions": [
+          "start up a conversation with someone else",
+          "introduce someone to an old friend of yours",
+          "get really attached to an inanimate object"
+        ]
+      },
+      {
+        "name": "proper",
+        "description": "A proper kith sticks with formality and tradition. They are often butlers, grocers, and chamberlains, among others.",
+        "actions": [
+          "explain how things have been handled in the past",
+          "judge something for its inappropriateness",
+          "struggle to get something new"
+        ]
+      },
+      {
+        "name": "raucous",
+        "description": "A raucous kith is always looking for a good time. They are often revelers, jesters, and roustabouts, among others.",
+        "actions": [
+          "find the fun in a dull task",
+          "get lost in the excitement",
+          "know exactly where a better party is"
+        ]
+      },
+      {
+        "name": "empathetic",
+        "description": "An empathetic kith can connect with and understand things no one else can. They are often gentle teachers, affectionate spirits, and anyone who has a knack for getting it, among others.",
+        "actions": [
+          "communicate with something that can't normally talk",
+          "express a concept in a way everyone understands",
+          "non-verbally ask: \"What are you feeling?\" If they don't want to answer you truthfully, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "many-faced",
+        "description": "A many-faced kith is a shapeshifter, who can adopt other forms. They are often trickster gods, sneaky thieves with a little bit of magic, and skilled mimics, among others.",
+        "actions": [
+          "change dramatically, and become something new",
+          "reveal another kith to have been them this whole time",
+          "look exactly like another character. If someone wants to spot the difference, they're going to need to spend a token"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "traumatized",
+    "traits": [
+      {
+        "name": "cautious",
+        "description": "A cautious kith spent the last of their trust a long time ago. They are often exhausted widows, cold-hearted farmers, and those who have seen first-hand the harshness of the world, among others.",
+        "actions": [
+          "point out a danger, real or imagined",
+          "refuse to open up to someone else",
+          "step out of your comfort zone, even slightly"
+        ]
+      },
+      {
+        "name": "empty",
+        "description": "An empty kith feels like there's just not much left to them anymore. They are often war-blasted survivors, haunted veterans, and those hollowed out by pain, among others.",
+        "actions": [
+          "sigh and gaze blankly",
+          "ask: \"Does it matter?\"",
+          "display an emotion you thought you couldn't anymore"
+        ]
+      },
+      {
+        "name": "frantic",
+        "description": "A frantic kith is struggling to get everything done. They are often overburdened caretakers, manic intellectuals, and those desperate to please, among others.",
+        "actions": [
+          "agree to something dangerous or risky",
+          "try to say too many things all at once",
+          "push against your instincts and take a break"
+        ]
+      },
+      {
+        "name": "furious",
+        "description": "A furious kith cannot hold back their rage. They are often vengeful mothers, soldiers with fuming eyes, and those forged into a weapon by the pain in their heart, among others.",
+        "actions": [
+          "lash out without meaning to",
+          "bottle everything up and seethe",
+          "express your rage in a constructive manner"
+        ]
+      },
+      {
+        "name": "grieving",
+        "description": "A grieving kith freshly mourns the loss of their love. They are often heartbroken parents, terrified exiles, and those promised greatness, among others.",
+        "actions": [
+          "overflow with emotion",
+          "hold tight to comfort and refuse to let go",
+          "ask: \"Are you in a place to listen right now?\""
+        ]
+      },
+      {
+        "name": "hurt",
+        "description": "A hurt kith nurses wounds that will never fully heal. They are often old heroes, aching patients, and those marked by pain, among others.",
+        "actions": [
+          "flinch at someone else's actions",
+          "re-open an old wound",
+          "articulate a step on the path towards healing"
+        ]
+      },
+      {
+        "name": "lost",
+        "description": "A lost kith has forgotten how to get back home. They are often lonely travelers, confused prophets, and those disassociated from this world, among others.",
+        "actions": [
+          "wander deep into the darkness",
+          "express the disconnect between yourself and the world around you",
+          "seek out the help of someone else to anchor you"
+        ]
+      },
+      {
+        "name": "nervous",
+        "description": "A nervous kith is very stressed out. They are often freaked-out kids, princes out of their depth, and those overwhelmed by the many dangers of the world, among others.",
+        "actions": [
+          "worry about something you don't have control over",
+          "say: \"I'm sorry.\"",
+          "ask: \"Is everything okay?\""
+        ]
+      },
+      {
+        "name": "starving",
+        "description": "A starving kith has been denied their hunger for too long, and it's burning them up inside. They are often hungry ghouls, spiteful wardens, and the shadows of monstrous gods, among others.",
+        "actions": [
+          "gnaw on what's left",
+          "blame the wrong person for your hunger",
+          "name a person, place, object, or secret. If someone wants to hide it from you, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "dead",
+        "description": "A dead kith was once alive, but isn't anymore. They are often spectral lights, wandering souls, and the last remnants of a forgotten time, among others.",
+        "actions": [
+          "provide a bridge from one life to the other",
+          "send a chill down someone's spine",
+          "show someone something they truly don't want to grapple with. If they want to avoid thinking about it, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "heroic",
+        "description": "A heroic kith believes they are the savior of the world. What a cruel fate indeed. They are often dragon-slayers, leaders of the rebellion, and those arrogant enough to seek out power, among others.",
+        "actions": [
+          "know what's best for everyone else",
+          "present a perfect persona to the world",
+          "declare someone fundamentally good or irredeemably evil. If anyone wants to prove you wrong, they're going to need to spend a token"
+        ]
+      },
+      {
+        "name": "royal",
+        "description": "A royal kith rules over this land with authority and lonely gravitas. They are often arrogant kings, towering giants, or those destined to be undone by their own glory, among others.",
+        "actions": [
+          "engage in a petty and useless display of power",
+          "inflict your will on the world around you",
+          "make a sweeping proclamation. If someone wants to openly defy you, they're going to need to spend a token"
+        ]
+      }
+    ]
+  }
+];
+const NATURES = [
+  {
+    "category": "comfortable",
+    "natures": [
+      {
+        "name": "farm",
+        "description": "A farm is a place where people live unremarkable lives, deeply rooted in the turning of the seasons and the work that must be done.",
+        "actions": [
+          "describe the calm mundanity of everyday life",
+          "reveal the thin margins people live on",
+          "ask: \"Hey, wanna help out?\" give them a token if they pitch in, in whatever way they can"
+        ],
+        "aesthetics": [
+          "rapscallions and merrymakers",
+          "crops as far as the eye can see",
+          "peaceful livestock",
+          "rusty overgrown weapons of war",
+          "a house you once called home",
+          "a childhood inspiration, now washed-up and pensive",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the scarecrow that walked away",
+          "the rain of a hundred days",
+          "the apple-girl and her loving parents",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "garden",
+        "description": "A garden is a place where everyone has plenty and the world is overflowing with gifts. When you arrive at this place, decide what it has in abundance.",
+        "actions": [
+          "describe the abundance all around us",
+          "threaten the health and vitality of the abundance",
+          "ask: \"What do you need most right now?\" give them a token if they can't find it here"
+        ],
+        "aesthetics": [
+          "trees overburdened with fruit",
+          "outrageously large gourds",
+          "prismatic butterflies",
+          "carefully-trimmed hedges",
+          "irrigating fountains",
+          "a friendly soul unfamiliar with the hardship of the world",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the peach tree's prophetic blossom",
+          "the old god in the old tree",
+          "the burning of the corn woman",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "market",
+        "description": "A market is a place where near-anything can be traded and bartered, and where people from across the Hæth gather with supplies to exchange.",
+        "actions": [
+          "describe what you can find here",
+          "reveal the consequences of theft",
+          "offer someone something they want, at an affordable price. give them a token if they refuse the offer"
+        ],
+        "aesthetics": [
+          "show-stopping livestock",
+          "foreign wares",
+          "confusing currencies",
+          "antique relics",
+          "distant smells",
+          "a familiar crafty merchant",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the eel daemon and the lutist",
+          "the crow and the thirty-three thieves",
+          "the golden king and how he lost his heart",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "monastery",
+        "description": "A monastery is a place where a community gathers to learn from the past and cultivate answers to the complicated questions of the world.",
+        "actions": [
+          "describe the rhythm of daily life",
+          "show tensions caused by generational divides",
+          "ask: \"Are you willing to wait to get the answer you seek?\" give them a token if they're here to wait. do not tell them the answer either way"
+        ],
+        "aesthetics": [
+          "the hermit's cottage",
+          "booming bells",
+          "a simple herb garden",
+          "scriptorium filled with knowledge",
+          "underground catacombs",
+          "a wise elder who remembers you from when you were very young",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the generous mentor and her betrayal",
+          "the janitor and the secret lessons he taught",
+          "the alabaster monk",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "tower",
+        "description": "A tower is a place that reaches so high up to the sky that it feels like it scrapes against the clouds.",
+        "actions": [
+          "describe something very small and far away",
+          "spread concern around structural stability",
+          "make someone dizzy or disoriented, and give them a token"
+        ],
+        "aesthetics": [
+          "narrow barely-stable entrance",
+          "winding staircase all the way to the top",
+          "shining light warning of danger",
+          "roosting moths in the rafters",
+          "not enough space for all the clutter",
+          "a grieving soul responsible for keeping everything in working order",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the observatory of the lightning dancers",
+          "the first of the moth-towers",
+          "the ghost that walks the stairs",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "workshop",
+        "description": "A workshop is a place where fine crafts and wares are created and given life, and where people value their ability to breathe life into art.",
+        "actions": [
+          "describe the process of creation",
+          "show conflict between expectations and demand",
+          "give someone a token if they work hard and sweat over their creation"
+        ],
+        "aesthetics": [
+          "a whirring loom",
+          "a chugging factory",
+          "a work song",
+          "an important supply line",
+          "a cunning kid too young to be working",
+          "an imaginative craftsperson who made one of your treasures",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the crafter who made herself a bride",
+          "the potter and the goddess",
+          "the neverending tapestry",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "verdant",
+    "natures": [
+      {
+        "name": "field",
+        "description": "A field is a place to lie back, feel the breeze in your fur, and look up at the sky.",
+        "actions": [
+          "describe a gentle place to rest",
+          "show someone looking for something lost",
+          "ask: \"Can we look at the clouds together?\" give them a token if they say yes"
+        ],
+        "aesthetics": [
+          "rustling grass",
+          "a babbling brook",
+          "a solitary tree",
+          "wild plants and herbs",
+          "mossy boulders",
+          "a friendly shepherd and their flock",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the lucky shepherd's friend",
+          "the barrow-ghosts",
+          "the dance of the flower goddess",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "glen",
+        "description": "A glen is a place overflowing with creatures and bugs, alive with movement and presence.",
+        "actions": [
+          "describe a world teeming with life",
+          "show a conflict between wild creatures",
+          "introduce a new buggy creature. give someone a token if they engage with it as an equal"
+        ],
+        "aesthetics": [
+          "chittering mantises",
+          "cautious pillbugs",
+          "massive beetles",
+          "watchful caterpillars",
+          "soaring dragonflies",
+          "a feral and remarkable creature that no one has seen for hundreds of years",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the meadow of the lightning dancers",
+          "the last of the monarch butterflies",
+          "the day the woods walked",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "hallow",
+        "description": "A hallow is a sacred place, where gods and mortals mingle. When you arrive at this place, decide a rule that all must follow.",
+        "actions": [
+          "describe the gods that live here and their mystery",
+          "offer someone the chance to break this place's rules to make their life easier",
+          "give someone a token when they bend over backwards to respect this place's rules"
+        ],
+        "aesthetics": [
+          "a well-tended shrine",
+          "a worn-away mask",
+          "watchful eyes in the shadows",
+          "an unexplainable miracle",
+          "forgotten offerings",
+          "an old sturdy caretaker-priest",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the miraculous teachings of the old priest",
+          "the fifteen sleeping gods",
+          "the maiden and her salmon-headed daemon love",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "hillock",
+        "description": "A hillock is a place in the foothills of a great and looming presence.",
+        "actions": [
+          "describe what we stand in the shadows of",
+          "show a threat that's up ahead",
+          "ask: \"What are you worried lies up ahead?\" and give them a token if they're right"
+        ],
+        "aesthetics": [
+          "a sheltered valley",
+          "strange piles of stones",
+          "a deep gorge",
+          "scattered fragments of civilization",
+          "evidence of distant strangeness",
+          "a quiet foreigner from higher-up",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the goat who slept for a hundred years",
+          "the fallen star and the stories she told",
+          "the hidden treasure of the hyena-king",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "lagoon",
+        "description": "A lagoon is a place of contemplation, introspection, and self-reflection.",
+        "actions": [
+          "describe the water and all the tiny creatures that live in it",
+          "make matters worse through people's inaction",
+          "ask: \"What have you been thinking about lately?\" and give them a token for their thoughts"
+        ],
+        "aesthetics": [
+          "mossy stones",
+          "a hidden grotto",
+          "a glorious waterfall",
+          "a rare and mysterious flower",
+          "a well-worn path",
+          "a watchful creature who hides from the outside",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the gifting of the heavenblade",
+          "the teacher who lives within the rocks",
+          "the waterfall's broken heart",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "swamp",
+        "description": "A swamp is a place where the air is as thick as the mud.",
+        "actions": [
+          "describe the heaviness of the world",
+          "show tension caused by stagnation",
+          "bog someone down, and give them a token"
+        ],
+        "aesthetics": [
+          "muck and mire",
+          "a pungent stench",
+          "a heavy fog",
+          "wriggling worms",
+          "a sinking feeling",
+          "a cunning and tricksy spirit offering to help",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the treacherous lights deep in the dark",
+          "the traveling bog",
+          "the shrewish witch and her magic cabin",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "liminal",
+    "natures": [
+      {
+        "name": "bridge",
+        "description": "A bridge is a passage from one place to the next.",
+        "actions": [
+          "describe the distance to the other side",
+          "push something off the edge",
+          "offer someone an easier way. give someone a token if they don't take it"
+        ],
+        "aesthetics": [
+          "ancient engineering",
+          "rickety planks",
+          "a sudden drop",
+          "a tollbooth",
+          "churning waters far below",
+          "a mighty creature hiding underneath",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the bargain of the flat-faced bass daemon",
+          "the path carved by the giant-king",
+          "the fox and toad crossing",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "island",
+        "description": "An island is a place kept secret and separate from the rest of the Hæth. When you arrive at this place, decide what makes it feel different than what you're used to.",
+        "actions": [
+          "describe the comfort of an isolated world",
+          "show conflict caused by isolation",
+          "give someone a token when they respect this place's difference"
+        ],
+        "aesthetics": [
+          "a concealed entrance",
+          "a forbidden secret",
+          "a hidden gem",
+          "a looming god",
+          "an inquisitive kid who has never seen the outside world",
+          "a proper leader who is afraid of the outside world",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the cave where the storms stay at night",
+          "the first survivor to wash ashore",
+          "the faith of the white dress",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "lake",
+        "description": "A lake is a vast body of water that spans an overwhelming distance.",
+        "actions": [
+          "describe the beauty of the water",
+          "wash something strange up on shore",
+          "bring someone somewhere completely unexpected, and give them a token"
+        ],
+        "aesthetics": [
+          "huge churning waves",
+          "sandy coastline",
+          "flotsam and jetsam",
+          "striders darting across the surface",
+          "barnacle-covered rocks",
+          "a nearby vessel you weren't expecting to see",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the kraken from the deep",
+          "the salmon with three wishes",
+          "the hubris of the warthog captain",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "port",
+        "description": "A port is the gateway through which the whole world opens up to you.",
+        "actions": [
+          "describe the ships and where they go",
+          "show the dangers of a fragile lifestyle",
+          "ask: \"Can I take you somewhere you've never been before?\" give them a token if they accept"
+        ],
+        "aesthetics": [
+          "chunky barges",
+          "hot air balloons",
+          "jetties and docks",
+          "fidgeting hoppers",
+          "smug captains",
+          "an adventurous buddy you once wandered the world with",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the headless spirit of the dockyard",
+          "the boat that would not sink",
+          "the eastern mist and the trouble it brings",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "road",
+        "description": "A road is a place that exists for traveling through.",
+        "actions": [
+          "describe something passing by",
+          "keep someone from getting where they're trying to go",
+          "push someone forward, and give them a token"
+        ],
+        "aesthetics": [
+          "cairns along the path",
+          "litter in the gutters",
+          "a lively waterway",
+          "grooves in the ground",
+          "a friendly caravan",
+          "an old relaxed comrade heading in a different direction",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the day the hounddog met his double",
+          "the possum made of mist",
+          "the pact of the crossroads shrine",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "tavern",
+        "description": "A tavern is a place of simple comfort, often settled into while on the journey from one land to the next.",
+        "actions": [
+          "describe a small comfort",
+          "sow confusion amongst the disoriented",
+          "offer someone comfort and amenities, at a price. give them a token if they refuse your offer"
+        ],
+        "aesthetics": [
+          "dry places to sleep",
+          "huge fireplace with a big pot of stew",
+          "barrels and barrels of mead",
+          "great hall jam-packed with layabouts",
+          "bar rat with a secret identity",
+          "a cheerful innkeep who you once called family",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the night the old king drank here",
+          "the cat with the magic ale",
+          "how the old wombat outdrank the slobbering god",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "sprawling",
+    "natures": [
+      {
+        "name": "carnival",
+        "description": "A carnival is a place full of celebration, decadence, and excitement.",
+        "actions": [
+          "describe the lights and the crowds",
+          "demand attention and adoration",
+          "ask: \"What will lure you deeper into the chaos?\" give them a token if they follow it"
+        ],
+        "aesthetics": [
+          "strange actors",
+          "extravagant displays of excess",
+          "a mysterious performance",
+          "a hungry crowd",
+          "masquerade accoutrements",
+          "a glamorous friend who has reinvented themself",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the girl with a thousand masks",
+          "the neverending wine glass",
+          "the slobbering god and the immorality feast",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "castle",
+        "description": "A castle is a place designed to keep everything else far outside its walls.",
+        "actions": [
+          "describe the walls that surround us",
+          "spread worry about a distant threat",
+          "keep someone from entering, and give them a token"
+        ],
+        "aesthetics": [
+          "long shadows",
+          "trophies from long-forgotten wars",
+          "watchtowers",
+          "a secret heart",
+          "the crest of a distant monarch",
+          "a furious administrator who oversees all",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the murdered brother",
+          "the ghost on the parapets",
+          "the lost empire of the brick-layers",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "furnace",
+        "description": "A furnace burns hot with the force of furious and creative fire.",
+        "actions": [
+          "describe the stifling heat",
+          "raise tensions caused by intolerable conditions",
+          "ask: \"Will you forge what once was broken?\" give them a token if they try their best"
+        ],
+        "aesthetics": [
+          "a seething, flaming forge",
+          "walls of iron tools",
+          "ornate glassworks",
+          "a legendary blade, left unfinished",
+          "an imaginative apprentice still learning the craft",
+          "a mighty smith with a burning grudge",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the eternal forge and its iron servants",
+          "the heavenblade and its construction",
+          "the binding of the slobbering god",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "metropolis",
+        "description": "A metropolis is a place where a lot of people live and where many communities sit side-by-side.",
+        "actions": [
+          "describe the diversity and variety of people",
+          "show conflict between differing needs and worldviews",
+          "tell someone they're lost, and give them a token"
+        ],
+        "aesthetics": [
+          "tall ramshackle apartments",
+          "curving arches",
+          "cobblestone streets",
+          "laundry hanging from windows",
+          "more people than you've ever met before",
+          "the enclave of a community you're proud to consider yourself part of",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the truce of the three gods",
+          "the night-goat of vermilion street",
+          "the giant scorpions in the sewer",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "palace",
+        "description": "A palace is a place ruled by power. It is beautiful, yet empty. When you arrive at this place, decide who claims to rule it, and who really rules it.",
+        "actions": [
+          "describe the stunning splendor of the world",
+          "show the aftermath of a conflict between its two rulers",
+          "ask: \"What here makes you feel small?\" and give them a token"
+        ],
+        "aesthetics": [
+          "glorious halls",
+          "many colorful flags",
+          "resounding trumpets",
+          "a crystal crown",
+          "a gleaming throne",
+          "the young and royal heir dreaming of freedom",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the throne of crystal and its many lies",
+          "the king who killed a god",
+          "the crumbling dynasty of the floating mountain",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "university",
+        "description": "A university is a place where many gather to learn from ancient texts.",
+        "actions": [
+          "describe the vast amount of knowledge still left to learn",
+          "show conflict between differing philosophies or viewpoints",
+          "ask: \"Do you want to learn a difficult or painful truth?\" give them a token if they listen"
+        ],
+        "aesthetics": [
+          "grassy campus quad",
+          "too-small dormitories",
+          "vast banquet hall with many long tables",
+          "statues of the founders in all their glory",
+          "an inquisitive and hopeful kid who doesn't want to be here",
+          "a witchy professor whom you once called a mentor",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the founders and their petty squabbles",
+          "the forbidden society of the theatre hall",
+          "that one prank that got far too out of hand",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "lonely",
+    "natures": [
+      {
+        "name": "cave",
+        "description": "A cave is a place fundamentally connected to the core of the earth, its wisdom, and its tenebrous secrets.",
+        "actions": [
+          "describe the beauty of the deepest shadows of the world",
+          "swallow something into the dark",
+          "ask: \"Will you wander ever deeper?\" give them a token if they say yes"
+        ],
+        "aesthetics": [
+          "darkness deeper than you expected",
+          "a bridge from this world to the next",
+          "petroglyphs",
+          "countless fungi",
+          "the voice of faraway winds",
+          "a cautious hermit",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the tapping on the walls",
+          "the first art and the stories it tells",
+          "the sleeping god at the bottom of the world",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "graveyard",
+        "description": "A graveyard is a place of death, where the lost are buried.",
+        "actions": [
+          "describe the weight of the past",
+          "show someone disrespecting the history of this place",
+          "ask: \"Will you tell us a story no one else could tell?\" give them a token if they do"
+        ],
+        "aesthetics": [
+          "scattered cairns",
+          "melted candles",
+          "gravestones",
+          "mysterious lights",
+          "deep and profound silence",
+          "an old forgotten friend, now dead",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the candlelit council and their warning",
+          "the day the dead danced with us",
+          "the mist rabbit and her rictus grin",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "mirage",
+        "description": "A mirage is a place that doesn't really exist.",
+        "actions": [
+          "describe something too good to be true",
+          "show someone lost in their folly",
+          "decide if something in front of someone is real, and then ask: \"Do you believe what you see?\" give them a token if they're wrong"
+        ],
+        "aesthetics": [
+          "too-vivid flowers",
+          "too-shining ramparts",
+          "too-verdant plantlife",
+          "too-satisfying food",
+          "too-beautiful music",
+          "too-friendly memory of a person",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the palace of the saccharine dead",
+          "the city of restless dreams",
+          "the emperor's false promise to his adoring lover",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "mirror",
+        "description": "A mirror is a place that reflects you back onto yourself.",
+        "actions": [
+          "describe what looks back",
+          "reflect back something someone didn't want to see",
+          "ask: \"What is it about your reflection that unnerves you?\" and give them a token"
+        ],
+        "aesthetics": [
+          "glassy water",
+          "salt flats",
+          "perfect calmness",
+          "scratches in the reflection",
+          "the sensation of an unfinished world",
+          "your doppelganger",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the march of the countless footsteps",
+          "the ghost whose name cannot be spoken",
+          "the very edge of the world itself",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "moor",
+        "description": "A moor is a quiet place, where sharp winds whistle through a stretched-out landscape.",
+        "actions": [
+          "describe what makes someone feel lonely",
+          "hint at something eerie",
+          "ask: \"What weighs on your mind?\" give them a token if they give a satisfying answer"
+        ],
+        "aesthetics": [
+          "distant wasp-caws",
+          "patches of wetland",
+          "a thin mist",
+          "gnarled trees",
+          "a shiver down your back",
+          "a nervous teen sneaking away for their love",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the devil-dog and its prey",
+          "the heron and her murdered lover",
+          "the lost army of the first queen",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "wilderness",
+        "description": "A wilderness is a place that holds nature close to its heart, closer than any mortal that dwells within.",
+        "actions": [
+          "describe something massive, sublime, and uncaring",
+          "show the challenges caused by living with nature",
+          "say: \"Get out of the way!\" and give everyone who does a token. describe what enormous thundering force nearly strikes them down"
+        ],
+        "aesthetics": [
+          "tangled undergrowth",
+          "trees older than any empire",
+          "something bigger than you've ever imagined",
+          "territorial bugs",
+          "a pristine waterfall",
+          "a creature assumed to be extinct",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the god of all the forests",
+          "the forest spirits and their mockery",
+          "the song at the heart of all things",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "desolate",
+    "natures": [
+      {
+        "name": "desert",
+        "description": "A desert is an empty place, without any of what you want or need.",
+        "actions": [
+          "describe the emptiness of the world",
+          "show someone lost and wandering",
+          "tell someone the path will be longer and more treacherous than they thought, and give them a token"
+        ],
+        "aesthetics": [
+          "sand that goes on forever",
+          "floating pillars of stone",
+          "a bitter chill",
+          "the harsh sun",
+          "the horizon line",
+          "a starving pilgrim with murky intentions",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the ghost-storm and the lost caravan",
+          "the opah daemon's whispers to the wandering prophet",
+          "the impossible rain",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "labyrinth",
+        "description": "A labyrinth is a tangled maze used to trick, imprison, and confuse.",
+        "actions": [
+          "describe the vast sprawl of the maze",
+          "disorient and confuse those attempting to travel",
+          "give someone two options, neither of which is correct, and give them a token"
+        ],
+        "aesthetics": [
+          "stone walls",
+          "tangled paths",
+          "unexpected hazards",
+          "chalk-marked directions",
+          "a lost innocent at the heart of it all",
+          "a heroic guide who might not be helpful",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the crow inventor and her wax wings",
+          "the paths that grow of their own accord",
+          "the ninety-nine wailing minnow daemons",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "maelstrom",
+        "description": "A maelstrom is a great and chaotic storm, full of winds and terrifying forces.",
+        "actions": [
+          "describe the storm that threatens us",
+          "smash something against the rocks",
+          "rip something away from someone, and give them a token"
+        ],
+        "aesthetics": [
+          "churning skies",
+          "howling winds",
+          "screeching wasps",
+          "bolts of lightning",
+          "flying debris",
+          "a mighty god spotted only in brief moments",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the fury of the north wind god",
+          "the lightning dancers and their beautiful war",
+          "the queen who ripped a hole in the world",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "mountain",
+        "description": "A mountain is a place where the earth meets the sky.",
+        "actions": [
+          "describe what can be seen from way up here",
+          "show someone pushed to desperate extremes",
+          "isolate someone from everyone else, and give them a token"
+        ],
+        "aesthetics": [
+          "sharp cliffs",
+          "a treacherous path",
+          "a lonely flower",
+          "a sign someone was here once",
+          "an even higher summit",
+          "a cautious creature hiding just out of sight",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the elk king feasting beneath the hills",
+          "the north wind god and what he taught us",
+          "where the gentle giants fought",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "ruin",
+        "description": "A ruin is a once-gleaming place that has fallen into disrepair and collapse.",
+        "actions": [
+          "describe what used to be here before",
+          "show consequences for the actions of the past",
+          "ask: \"Do you know what once mattered here?\" give them a token if they don't"
+        ],
+        "aesthetics": [
+          "crumbling pillars",
+          "fragments of pottery and bone",
+          "abandoned blades",
+          "monuments to arrogance",
+          "the foundations of something massive",
+          "the last grieving survivor of an ancient time",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the snowblanket estate of the last great empress",
+          "the crypt of the dragons",
+          "the desecrated temple of the slobbering god",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "waste",
+        "description": "A waste is a place that life has abandoned.",
+        "actions": [
+          "describe the barren earth",
+          "keep something from growing or changing",
+          "ask: \"What do you see here that breaks your heart?\" and give them a token"
+        ],
+        "aesthetics": [
+          "dead trees",
+          "tiny struggling saplings",
+          "dull skies",
+          "craters blasted in the ground",
+          "wisps of smoke",
+          "a fragile people wandering the lonely world",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the curse of the lonely king",
+          "the corpse of the slobbering god itself",
+          "where the apocalypse will someday ignite",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  }
+];
+
+/* ---------- Helpers ---------- */
+function weightedChoice(items, weights) {
+  const total = weights.reduce((a, b) => a + b, 0);
+  let r = Math.random() * total;
+  for (let i = 0; i < items.length; i++) {
+    r -= weights[i];
+    if (r < 0) return items[i];
+  }
+  return items[items.length - 1];
+}
+
+function randomOf(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// Pick n distinct entries from arr (assumes arr.length >= n).
+function sampleUnique(arr, n) {
+  const pool = arr.slice();
+  const out = [];
+  for (let i = 0; i < n && pool.length; i++) {
+    const idx = Math.floor(Math.random() * pool.length);
+    out.push(pool.splice(idx, 1)[0]);
+  }
+  return out;
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[c]));
+}
+
+/* ---------- Trait table ---------- */
+// Trauma category is weighted half as likely as every other category.
+function rollTrait() {
+  const TRAUMA_CATEGORY = "traumatized";
+  const weights = TRAITS.map(c => c.category === TRAUMA_CATEGORY ? 0.5 : 1);
+  const category = weightedChoice(TRAITS, weights);
+
+  const trait = randomOf(category.traits);
+
+  // Always one action; 50% chance of a second, different action.
+  const actions = [randomOf(trait.actions)];
+  if (Math.random() < 0.5 && trait.actions.length > 1) {
+    const remaining = trait.actions.filter(a => a !== actions[0]);
+    actions.push(randomOf(remaining));
+  }
+
+  return { category: category.category, trait, actions };
+}
+
+/* ---------- Nature table ---------- */
+// First 3 categories (comfortable, verdant, liminal) chosen 80% of the time;
+// the other 3 categories chosen 20% of the time.
+function rollNature() {
+  const COMMON = ["comfortable", "verdant", "liminal"];
+  const weights = NATURES.map(c => COMMON.includes(c.category) ? 0.8 / 3 : 0.2 / 3);
+  const category = weightedChoice(NATURES, weights);
+
+  const nature = randomOf(category.natures);
+  const aesthetics = sampleUnique(nature.aesthetics, 2);
+  const folklore = randomOf(nature.folklore);
+
+  return { category: category.category, nature, aesthetics, folklore };
+}
+
+/* ---------- Rendering ---------- */
+function traitToHTML(res) {
+  const actions = res.actions.map(a => `<li>${esc(a)}</li>`).join("");
+  return `
+    <span class="cat">${esc(res.category)}</span>
+    <h3>${esc(res.trait.name)}</h3>
+    <p class="desc">${esc(res.trait.description)}</p>
+    <h4>Action${res.actions.length > 1 ? "s" : ""}</h4>
+    <ul class="actions-list">${actions}</ul>`;
+}
+
+function natureToHTML(res) {
+  const aesthetics = res.aesthetics.map(a => `<li>${esc(a)}</li>`).join("");
+  const actions = res.nature.actions.map(a => `<li>${esc(a)}</li>`).join("");
+  return `
+    <span class="cat">${esc(res.category)}</span>
+    <h3>${esc(res.nature.name)}</h3>
+    <p class="desc">${esc(res.nature.description)}</p>
+    <h4>Aesthetics</h4>
+    <ul>${aesthetics}</ul>
+    <h4>Folklore</h4>
+    <ul><li>${esc(res.folklore)}</li></ul>
+    <h4>Actions</h4>
+    <ul class="actions-list">${actions}</ul>`;
+}
+
+function traitToText(res) {
+  const actions = res.actions.map(a => `- ${a}`).join("\n");
+  return `TRAIT: ${res.trait.name} (${res.category})\n${res.trait.description}\n\nAction${res.actions.length > 1 ? "s" : ""}:\n${actions}`;
+}
+
+function natureToText(res) {
+  const aesthetics = res.aesthetics.map(a => `- ${a}`).join("\n");
+  const actions = res.nature.actions.map(a => `- ${a}`).join("\n");
+  return `NATURE: ${res.nature.name} (${res.category})\n${res.nature.description}\n\nAesthetics:\n${aesthetics}\n\nFolklore:\n- ${res.folklore}\n\nActions:\n${actions}`;
+}
+
+/* ---------- Copy to clipboard ---------- */
+async function copyText(text, btn) {
+  let ok = false;
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      ok = true;
+    }
+  } catch (e) { /* fall through to legacy method */ }
+
+  if (!ok) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+  }
+
+  const original = btn.textContent;
+  btn.textContent = ok ? "Copied!" : "Press Ctrl+C";
+  setTimeout(() => { btn.textContent = original; }, 1400);
+}
+
+/* ---------- Wiring ---------- */
+const traitResultEl = document.getElementById("traitResult");
+const natureResultEl = document.getElementById("natureResult");
+const copyTraitBtn = document.getElementById("copyTrait");
+const copyNatureBtn = document.getElementById("copyNature");
+
+let lastTrait = null;
+let lastNature = null;
+
+document.getElementById("rollTrait").addEventListener("click", () => {
+  lastTrait = rollTrait();
+  traitResultEl.classList.remove("empty");
+  traitResultEl.innerHTML = traitToHTML(lastTrait);
+  copyTraitBtn.disabled = false;
+});
+
+document.getElementById("rollNature").addEventListener("click", () => {
+  lastNature = rollNature();
+  natureResultEl.classList.remove("empty");
+  natureResultEl.innerHTML = natureToHTML(lastNature);
+  copyNatureBtn.disabled = false;
+});
+
+copyTraitBtn.addEventListener("click", () => {
+  if (lastTrait) copyText(traitToText(lastTrait), copyTraitBtn);
+});
+
+copyNatureBtn.addEventListener("click", () => {
+  if (lastNature) copyText(natureToText(lastNature), copyNatureBtn);
+});
+</script>
+</body>
+</html>

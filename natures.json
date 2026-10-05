@@ -1,0 +1,896 @@
+[
+  {
+    "category": "comfortable",
+    "natures": [
+      {
+        "name": "farm",
+        "description": "A farm is a place where people live unremarkable lives, deeply rooted in the turning of the seasons and the work that must be done.",
+        "actions": [
+          "describe the calm mundanity of everyday life",
+          "reveal the thin margins people live on",
+          "ask: \"Hey, wanna help out?\" give them a token if they pitch in, in whatever way they can"
+        ],
+        "aesthetics": [
+          "rapscallions and merrymakers",
+          "crops as far as the eye can see",
+          "peaceful livestock",
+          "rusty overgrown weapons of war",
+          "a house you once called home",
+          "a childhood inspiration, now washed-up and pensive",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the scarecrow that walked away",
+          "the rain of a hundred days",
+          "the apple-girl and her loving parents",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "garden",
+        "description": "A garden is a place where everyone has plenty and the world is overflowing with gifts. When you arrive at this place, decide what it has in abundance.",
+        "actions": [
+          "describe the abundance all around us",
+          "threaten the health and vitality of the abundance",
+          "ask: \"What do you need most right now?\" give them a token if they can't find it here"
+        ],
+        "aesthetics": [
+          "trees overburdened with fruit",
+          "outrageously large gourds",
+          "prismatic butterflies",
+          "carefully-trimmed hedges",
+          "irrigating fountains",
+          "a friendly soul unfamiliar with the hardship of the world",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the peach tree's prophetic blossom",
+          "the old god in the old tree",
+          "the burning of the corn woman",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "market",
+        "description": "A market is a place where near-anything can be traded and bartered, and where people from across the Hæth gather with supplies to exchange.",
+        "actions": [
+          "describe what you can find here",
+          "reveal the consequences of theft",
+          "offer someone something they want, at an affordable price. give them a token if they refuse the offer"
+        ],
+        "aesthetics": [
+          "show-stopping livestock",
+          "foreign wares",
+          "confusing currencies",
+          "antique relics",
+          "distant smells",
+          "a familiar crafty merchant",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the eel daemon and the lutist",
+          "the crow and the thirty-three thieves",
+          "the golden king and how he lost his heart",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "monastery",
+        "description": "A monastery is a place where a community gathers to learn from the past and cultivate answers to the complicated questions of the world.",
+        "actions": [
+          "describe the rhythm of daily life",
+          "show tensions caused by generational divides",
+          "ask: \"Are you willing to wait to get the answer you seek?\" give them a token if they're here to wait. do not tell them the answer either way"
+        ],
+        "aesthetics": [
+          "the hermit's cottage",
+          "booming bells",
+          "a simple herb garden",
+          "scriptorium filled with knowledge",
+          "underground catacombs",
+          "a wise elder who remembers you from when you were very young",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the generous mentor and her betrayal",
+          "the janitor and the secret lessons he taught",
+          "the alabaster monk",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "tower",
+        "description": "A tower is a place that reaches so high up to the sky that it feels like it scrapes against the clouds.",
+        "actions": [
+          "describe something very small and far away",
+          "spread concern around structural stability",
+          "make someone dizzy or disoriented, and give them a token"
+        ],
+        "aesthetics": [
+          "narrow barely-stable entrance",
+          "winding staircase all the way to the top",
+          "shining light warning of danger",
+          "roosting moths in the rafters",
+          "not enough space for all the clutter",
+          "a grieving soul responsible for keeping everything in working order",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the observatory of the lightning dancers",
+          "the first of the moth-towers",
+          "the ghost that walks the stairs",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "workshop",
+        "description": "A workshop is a place where fine crafts and wares are created and given life, and where people value their ability to breathe life into art.",
+        "actions": [
+          "describe the process of creation",
+          "show conflict between expectations and demand",
+          "give someone a token if they work hard and sweat over their creation"
+        ],
+        "aesthetics": [
+          "a whirring loom",
+          "a chugging factory",
+          "a work song",
+          "an important supply line",
+          "a cunning kid too young to be working",
+          "an imaginative craftsperson who made one of your treasures",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the crafter who made herself a bride",
+          "the potter and the goddess",
+          "the neverending tapestry",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "verdant",
+    "natures": [
+      {
+        "name": "field",
+        "description": "A field is a place to lie back, feel the breeze in your fur, and look up at the sky.",
+        "actions": [
+          "describe a gentle place to rest",
+          "show someone looking for something lost",
+          "ask: \"Can we look at the clouds together?\" give them a token if they say yes"
+        ],
+        "aesthetics": [
+          "rustling grass",
+          "a babbling brook",
+          "a solitary tree",
+          "wild plants and herbs",
+          "mossy boulders",
+          "a friendly shepherd and their flock",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the lucky shepherd's friend",
+          "the barrow-ghosts",
+          "the dance of the flower goddess",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "glen",
+        "description": "A glen is a place overflowing with creatures and bugs, alive with movement and presence.",
+        "actions": [
+          "describe a world teeming with life",
+          "show a conflict between wild creatures",
+          "introduce a new buggy creature. give someone a token if they engage with it as an equal"
+        ],
+        "aesthetics": [
+          "chittering mantises",
+          "cautious pillbugs",
+          "massive beetles",
+          "watchful caterpillars",
+          "soaring dragonflies",
+          "a feral and remarkable creature that no one has seen for hundreds of years",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the meadow of the lightning dancers",
+          "the last of the monarch butterflies",
+          "the day the woods walked",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "hallow",
+        "description": "A hallow is a sacred place, where gods and mortals mingle. When you arrive at this place, decide a rule that all must follow.",
+        "actions": [
+          "describe the gods that live here and their mystery",
+          "offer someone the chance to break this place's rules to make their life easier",
+          "give someone a token when they bend over backwards to respect this place's rules"
+        ],
+        "aesthetics": [
+          "a well-tended shrine",
+          "a worn-away mask",
+          "watchful eyes in the shadows",
+          "an unexplainable miracle",
+          "forgotten offerings",
+          "an old sturdy caretaker-priest",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the miraculous teachings of the old priest",
+          "the fifteen sleeping gods",
+          "the maiden and her salmon-headed daemon love",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "hillock",
+        "description": "A hillock is a place in the foothills of a great and looming presence.",
+        "actions": [
+          "describe what we stand in the shadows of",
+          "show a threat that's up ahead",
+          "ask: \"What are you worried lies up ahead?\" and give them a token if they're right"
+        ],
+        "aesthetics": [
+          "a sheltered valley",
+          "strange piles of stones",
+          "a deep gorge",
+          "scattered fragments of civilization",
+          "evidence of distant strangeness",
+          "a quiet foreigner from higher-up",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the goat who slept for a hundred years",
+          "the fallen star and the stories she told",
+          "the hidden treasure of the hyena-king",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "lagoon",
+        "description": "A lagoon is a place of contemplation, introspection, and self-reflection.",
+        "actions": [
+          "describe the water and all the tiny creatures that live in it",
+          "make matters worse through people's inaction",
+          "ask: \"What have you been thinking about lately?\" and give them a token for their thoughts"
+        ],
+        "aesthetics": [
+          "mossy stones",
+          "a hidden grotto",
+          "a glorious waterfall",
+          "a rare and mysterious flower",
+          "a well-worn path",
+          "a watchful creature who hides from the outside",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the gifting of the heavenblade",
+          "the teacher who lives within the rocks",
+          "the waterfall's broken heart",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "swamp",
+        "description": "A swamp is a place where the air is as thick as the mud.",
+        "actions": [
+          "describe the heaviness of the world",
+          "show tension caused by stagnation",
+          "bog someone down, and give them a token"
+        ],
+        "aesthetics": [
+          "muck and mire",
+          "a pungent stench",
+          "a heavy fog",
+          "wriggling worms",
+          "a sinking feeling",
+          "a cunning and tricksy spirit offering to help",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the treacherous lights deep in the dark",
+          "the traveling bog",
+          "the shrewish witch and her magic cabin",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "liminal",
+    "natures": [
+      {
+        "name": "bridge",
+        "description": "A bridge is a passage from one place to the next.",
+        "actions": [
+          "describe the distance to the other side",
+          "push something off the edge",
+          "offer someone an easier way. give someone a token if they don't take it"
+        ],
+        "aesthetics": [
+          "ancient engineering",
+          "rickety planks",
+          "a sudden drop",
+          "a tollbooth",
+          "churning waters far below",
+          "a mighty creature hiding underneath",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the bargain of the flat-faced bass daemon",
+          "the path carved by the giant-king",
+          "the fox and toad crossing",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "island",
+        "description": "An island is a place kept secret and separate from the rest of the Hæth. When you arrive at this place, decide what makes it feel different than what you're used to.",
+        "actions": [
+          "describe the comfort of an isolated world",
+          "show conflict caused by isolation",
+          "give someone a token when they respect this place's difference"
+        ],
+        "aesthetics": [
+          "a concealed entrance",
+          "a forbidden secret",
+          "a hidden gem",
+          "a looming god",
+          "an inquisitive kid who has never seen the outside world",
+          "a proper leader who is afraid of the outside world",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the cave where the storms stay at night",
+          "the first survivor to wash ashore",
+          "the faith of the white dress",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "lake",
+        "description": "A lake is a vast body of water that spans an overwhelming distance.",
+        "actions": [
+          "describe the beauty of the water",
+          "wash something strange up on shore",
+          "bring someone somewhere completely unexpected, and give them a token"
+        ],
+        "aesthetics": [
+          "huge churning waves",
+          "sandy coastline",
+          "flotsam and jetsam",
+          "striders darting across the surface",
+          "barnacle-covered rocks",
+          "a nearby vessel you weren't expecting to see",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the kraken from the deep",
+          "the salmon with three wishes",
+          "the hubris of the warthog captain",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "port",
+        "description": "A port is the gateway through which the whole world opens up to you.",
+        "actions": [
+          "describe the ships and where they go",
+          "show the dangers of a fragile lifestyle",
+          "ask: \"Can I take you somewhere you've never been before?\" give them a token if they accept"
+        ],
+        "aesthetics": [
+          "chunky barges",
+          "hot air balloons",
+          "jetties and docks",
+          "fidgeting hoppers",
+          "smug captains",
+          "an adventurous buddy you once wandered the world with",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the headless spirit of the dockyard",
+          "the boat that would not sink",
+          "the eastern mist and the trouble it brings",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "road",
+        "description": "A road is a place that exists for traveling through.",
+        "actions": [
+          "describe something passing by",
+          "keep someone from getting where they're trying to go",
+          "push someone forward, and give them a token"
+        ],
+        "aesthetics": [
+          "cairns along the path",
+          "litter in the gutters",
+          "a lively waterway",
+          "grooves in the ground",
+          "a friendly caravan",
+          "an old relaxed comrade heading in a different direction",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the day the hounddog met his double",
+          "the possum made of mist",
+          "the pact of the crossroads shrine",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "tavern",
+        "description": "A tavern is a place of simple comfort, often settled into while on the journey from one land to the next.",
+        "actions": [
+          "describe a small comfort",
+          "sow confusion amongst the disoriented",
+          "offer someone comfort and amenities, at a price. give them a token if they refuse your offer"
+        ],
+        "aesthetics": [
+          "dry places to sleep",
+          "huge fireplace with a big pot of stew",
+          "barrels and barrels of mead",
+          "great hall jam-packed with layabouts",
+          "bar rat with a secret identity",
+          "a cheerful innkeep who you once called family",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the night the old king drank here",
+          "the cat with the magic ale",
+          "how the old wombat outdrank the slobbering god",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "sprawling",
+    "natures": [
+      {
+        "name": "carnival",
+        "description": "A carnival is a place full of celebration, decadence, and excitement.",
+        "actions": [
+          "describe the lights and the crowds",
+          "demand attention and adoration",
+          "ask: \"What will lure you deeper into the chaos?\" give them a token if they follow it"
+        ],
+        "aesthetics": [
+          "strange actors",
+          "extravagant displays of excess",
+          "a mysterious performance",
+          "a hungry crowd",
+          "masquerade accoutrements",
+          "a glamorous friend who has reinvented themself",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the girl with a thousand masks",
+          "the neverending wine glass",
+          "the slobbering god and the immorality feast",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "castle",
+        "description": "A castle is a place designed to keep everything else far outside its walls.",
+        "actions": [
+          "describe the walls that surround us",
+          "spread worry about a distant threat",
+          "keep someone from entering, and give them a token"
+        ],
+        "aesthetics": [
+          "long shadows",
+          "trophies from long-forgotten wars",
+          "watchtowers",
+          "a secret heart",
+          "the crest of a distant monarch",
+          "a furious administrator who oversees all",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the murdered brother",
+          "the ghost on the parapets",
+          "the lost empire of the brick-layers",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "furnace",
+        "description": "A furnace burns hot with the force of furious and creative fire.",
+        "actions": [
+          "describe the stifling heat",
+          "raise tensions caused by intolerable conditions",
+          "ask: \"Will you forge what once was broken?\" give them a token if they try their best"
+        ],
+        "aesthetics": [
+          "a seething, flaming forge",
+          "walls of iron tools",
+          "ornate glassworks",
+          "a legendary blade, left unfinished",
+          "an imaginative apprentice still learning the craft",
+          "a mighty smith with a burning grudge",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the eternal forge and its iron servants",
+          "the heavenblade and its construction",
+          "the binding of the slobbering god",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "metropolis",
+        "description": "A metropolis is a place where a lot of people live and where many communities sit side-by-side.",
+        "actions": [
+          "describe the diversity and variety of people",
+          "show conflict between differing needs and worldviews",
+          "tell someone they're lost, and give them a token"
+        ],
+        "aesthetics": [
+          "tall ramshackle apartments",
+          "curving arches",
+          "cobblestone streets",
+          "laundry hanging from windows",
+          "more people than you've ever met before",
+          "the enclave of a community you're proud to consider yourself part of",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the truce of the three gods",
+          "the night-goat of vermilion street",
+          "the giant scorpions in the sewer",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "palace",
+        "description": "A palace is a place ruled by power. It is beautiful, yet empty. When you arrive at this place, decide who claims to rule it, and who really rules it.",
+        "actions": [
+          "describe the stunning splendor of the world",
+          "show the aftermath of a conflict between its two rulers",
+          "ask: \"What here makes you feel small?\" and give them a token"
+        ],
+        "aesthetics": [
+          "glorious halls",
+          "many colorful flags",
+          "resounding trumpets",
+          "a crystal crown",
+          "a gleaming throne",
+          "the young and royal heir dreaming of freedom",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the throne of crystal and its many lies",
+          "the king who killed a god",
+          "the crumbling dynasty of the floating mountain",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "university",
+        "description": "A university is a place where many gather to learn from ancient texts.",
+        "actions": [
+          "describe the vast amount of knowledge still left to learn",
+          "show conflict between differing philosophies or viewpoints",
+          "ask: \"Do you want to learn a difficult or painful truth?\" give them a token if they listen"
+        ],
+        "aesthetics": [
+          "grassy campus quad",
+          "too-small dormitories",
+          "vast banquet hall with many long tables",
+          "statues of the founders in all their glory",
+          "an inquisitive and hopeful kid who doesn't want to be here",
+          "a witchy professor whom you once called a mentor",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the founders and their petty squabbles",
+          "the forbidden society of the theatre hall",
+          "that one prank that got far too out of hand",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "lonely",
+    "natures": [
+      {
+        "name": "cave",
+        "description": "A cave is a place fundamentally connected to the core of the earth, its wisdom, and its tenebrous secrets.",
+        "actions": [
+          "describe the beauty of the deepest shadows of the world",
+          "swallow something into the dark",
+          "ask: \"Will you wander ever deeper?\" give them a token if they say yes"
+        ],
+        "aesthetics": [
+          "darkness deeper than you expected",
+          "a bridge from this world to the next",
+          "petroglyphs",
+          "countless fungi",
+          "the voice of faraway winds",
+          "a cautious hermit",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the tapping on the walls",
+          "the first art and the stories it tells",
+          "the sleeping god at the bottom of the world",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "graveyard",
+        "description": "A graveyard is a place of death, where the lost are buried.",
+        "actions": [
+          "describe the weight of the past",
+          "show someone disrespecting the history of this place",
+          "ask: \"Will you tell us a story no one else could tell?\" give them a token if they do"
+        ],
+        "aesthetics": [
+          "scattered cairns",
+          "melted candles",
+          "gravestones",
+          "mysterious lights",
+          "deep and profound silence",
+          "an old forgotten friend, now dead",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the candlelit council and their warning",
+          "the day the dead danced with us",
+          "the mist rabbit and her rictus grin",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "mirage",
+        "description": "A mirage is a place that doesn't really exist.",
+        "actions": [
+          "describe something too good to be true",
+          "show someone lost in their folly",
+          "decide if something in front of someone is real, and then ask: \"Do you believe what you see?\" give them a token if they're wrong"
+        ],
+        "aesthetics": [
+          "too-vivid flowers",
+          "too-shining ramparts",
+          "too-verdant plantlife",
+          "too-satisfying food",
+          "too-beautiful music",
+          "too-friendly memory of a person",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the palace of the saccharine dead",
+          "the city of restless dreams",
+          "the emperor's false promise to his adoring lover",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "mirror",
+        "description": "A mirror is a place that reflects you back onto yourself.",
+        "actions": [
+          "describe what looks back",
+          "reflect back something someone didn't want to see",
+          "ask: \"What is it about your reflection that unnerves you?\" and give them a token"
+        ],
+        "aesthetics": [
+          "glassy water",
+          "salt flats",
+          "perfect calmness",
+          "scratches in the reflection",
+          "the sensation of an unfinished world",
+          "your doppelganger",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the march of the countless footsteps",
+          "the ghost whose name cannot be spoken",
+          "the very edge of the world itself",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "moor",
+        "description": "A moor is a quiet place, where sharp winds whistle through a stretched-out landscape.",
+        "actions": [
+          "describe what makes someone feel lonely",
+          "hint at something eerie",
+          "ask: \"What weighs on your mind?\" give them a token if they give a satisfying answer"
+        ],
+        "aesthetics": [
+          "distant wasp-caws",
+          "patches of wetland",
+          "a thin mist",
+          "gnarled trees",
+          "a shiver down your back",
+          "a nervous teen sneaking away for their love",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the devil-dog and its prey",
+          "the heron and her murdered lover",
+          "the lost army of the first queen",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "wilderness",
+        "description": "A wilderness is a place that holds nature close to its heart, closer than any mortal that dwells within.",
+        "actions": [
+          "describe something massive, sublime, and uncaring",
+          "show the challenges caused by living with nature",
+          "say: \"Get out of the way!\" and give everyone who does a token. describe what enormous thundering force nearly strikes them down"
+        ],
+        "aesthetics": [
+          "tangled undergrowth",
+          "trees older than any empire",
+          "something bigger than you've ever imagined",
+          "territorial bugs",
+          "a pristine waterfall",
+          "a creature assumed to be extinct",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the god of all the forests",
+          "the forest spirits and their mockery",
+          "the song at the heart of all things",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "desolate",
+    "natures": [
+      {
+        "name": "desert",
+        "description": "A desert is an empty place, without any of what you want or need.",
+        "actions": [
+          "describe the emptiness of the world",
+          "show someone lost and wandering",
+          "tell someone the path will be longer and more treacherous than they thought, and give them a token"
+        ],
+        "aesthetics": [
+          "sand that goes on forever",
+          "floating pillars of stone",
+          "a bitter chill",
+          "the harsh sun",
+          "the horizon line",
+          "a starving pilgrim with murky intentions",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the ghost-storm and the lost caravan",
+          "the opah daemon's whispers to the wandering prophet",
+          "the impossible rain",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "labyrinth",
+        "description": "A labyrinth is a tangled maze used to trick, imprison, and confuse.",
+        "actions": [
+          "describe the vast sprawl of the maze",
+          "disorient and confuse those attempting to travel",
+          "give someone two options, neither of which is correct, and give them a token"
+        ],
+        "aesthetics": [
+          "stone walls",
+          "tangled paths",
+          "unexpected hazards",
+          "chalk-marked directions",
+          "a lost innocent at the heart of it all",
+          "a heroic guide who might not be helpful",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the crow inventor and her wax wings",
+          "the paths that grow of their own accord",
+          "the ninety-nine wailing minnow daemons",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "maelstrom",
+        "description": "A maelstrom is a great and chaotic storm, full of winds and terrifying forces.",
+        "actions": [
+          "describe the storm that threatens us",
+          "smash something against the rocks",
+          "rip something away from someone, and give them a token"
+        ],
+        "aesthetics": [
+          "churning skies",
+          "howling winds",
+          "screeching wasps",
+          "bolts of lightning",
+          "flying debris",
+          "a mighty god spotted only in brief moments",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the fury of the north wind god",
+          "the lightning dancers and their beautiful war",
+          "the queen who ripped a hole in the world",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "mountain",
+        "description": "A mountain is a place where the earth meets the sky.",
+        "actions": [
+          "describe what can be seen from way up here",
+          "show someone pushed to desperate extremes",
+          "isolate someone from everyone else, and give them a token"
+        ],
+        "aesthetics": [
+          "sharp cliffs",
+          "a treacherous path",
+          "a lonely flower",
+          "a sign someone was here once",
+          "an even higher summit",
+          "a cautious creature hiding just out of sight",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the elk king feasting beneath the hills",
+          "the north wind god and what he taught us",
+          "where the gentle giants fought",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "ruin",
+        "description": "A ruin is a once-gleaming place that has fallen into disrepair and collapse.",
+        "actions": [
+          "describe what used to be here before",
+          "show consequences for the actions of the past",
+          "ask: \"Do you know what once mattered here?\" give them a token if they don't"
+        ],
+        "aesthetics": [
+          "crumbling pillars",
+          "fragments of pottery and bone",
+          "abandoned blades",
+          "monuments to arrogance",
+          "the foundations of something massive",
+          "the last grieving survivor of an ancient time",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the snowblanket estate of the last great empress",
+          "the crypt of the dragons",
+          "the desecrated temple of the slobbering god",
+          "something else of your own invention"
+        ]
+      },
+      {
+        "name": "waste",
+        "description": "A waste is a place that life has abandoned.",
+        "actions": [
+          "describe the barren earth",
+          "keep something from growing or changing",
+          "ask: \"What do you see here that breaks your heart?\" and give them a token"
+        ],
+        "aesthetics": [
+          "dead trees",
+          "tiny struggling saplings",
+          "dull skies",
+          "craters blasted in the ground",
+          "wisps of smoke",
+          "a fragile people wandering the lonely world",
+          "something else of your own invention"
+        ],
+        "folklore": [
+          "the curse of the lonely king",
+          "the corpse of the slobbering god itself",
+          "where the apocalypse will someday ignite",
+          "something else of your own invention"
+        ]
+      }
+    ]
+  }
+]
